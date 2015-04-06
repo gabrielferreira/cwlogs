@@ -5,7 +5,7 @@ a_key = os.environ.get('AWS_ACCESS_KEY_ID')
 region = os.environ.get('REGION')
 print 'conectando'
 conn = logs.connect_to_region(region_name=region, aws_access_key_id=a_key, aws_secret_access_key=s_key)
-l_group_name = 'Osklen-Webstore-PROD'
+l_group_name = ''
 log_streams = []
 events = []
 l_stream_name_like = ''
