@@ -7,11 +7,15 @@ if os.environ.has_key('AWS_ACCESS_KEY_ID'):
 if os.environ.has_key('REGION'):
     region = os.environ.get('REGION')
 print 'conectando'
+<<<<<<< HEAD
 if a_key and s_key and region:
     conn = logs.connect_to_region(region_name=region, aws_access_key_id=a_key, aws_secret_access_key=s_key)
 elif region:
     conn = logs.connect_to_region(region_name=region)
 
+=======
+conn = logs.connect_to_region(region_name=region, aws_access_key_id=a_key, aws_secret_access_key=s_key)
+>>>>>>> 5bcadcac8b29e62a622466df19b802438d5eec15
 l_group_name = ''
 log_streams = []
 events = []
