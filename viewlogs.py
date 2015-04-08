@@ -7,15 +7,10 @@ if os.environ.has_key('AWS_ACCESS_KEY_ID'):
 if os.environ.has_key('REGION'):
     region = os.environ.get('REGION')
 print 'conectando'
-<<<<<<< HEAD
 if a_key and s_key and region:
     conn = logs.connect_to_region(region_name=region, aws_access_key_id=a_key, aws_secret_access_key=s_key)
 elif region:
     conn = logs.connect_to_region(region_name=region)
-
-=======
-conn = logs.connect_to_region(region_name=region, aws_access_key_id=a_key, aws_secret_access_key=s_key)
->>>>>>> 5bcadcac8b29e62a622466df19b802438d5eec15
 l_group_name = ''
 log_streams = []
 events = []
@@ -36,7 +31,6 @@ def concat_log_streams(l_streams, _next_token=None):
         concat_log_streams(l_streams, l_stream['nextToken'])
 
 concat_log_streams(log_streams)
-import ipdb; ipdb.set_trace()
 print 'filtrando log_streams'
 if l_stream_name_like:
     log_streams = filter(lambda x: x[u'logStreamName'].__contains__(l_stream_name_like), log_streams)
@@ -52,6 +46,5 @@ for ls in log_streams:
     concat_event(l_group_name, ls[u'logStreamName'], None, events)
 
 events = sorted(events, key=lambda k: k['timestamp'], reverse=True)
-import ipdb; ipdb.set_trace()
 with open('result', 'w') as f:
     f.write('\n'.join(l['message'] for l in events))
