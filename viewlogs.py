@@ -11,6 +11,8 @@ if a_key and s_key and region:
     conn = logs.connect_to_region(region_name=region, aws_access_key_id=a_key, aws_secret_access_key=s_key)
 elif region:
     conn = logs.connect_to_region(region_name=region)
+else:
+    conn = logs.connect_to_region(region_name='us-east-1')
 l_group_name = ''
 log_streams = []
 events = []
