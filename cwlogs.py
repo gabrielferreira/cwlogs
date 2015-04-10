@@ -3,9 +3,6 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    if request.method == 'GET':
-
-    # import pdb; pdb.set_trace()
     return render_template('home.html')
 
 @app.route('/_export')
@@ -14,6 +11,12 @@ def export():
     lStreamPrefix = None
     region = request.args.get('region')
     daysAgo = request.args.get('d_ago', 0, type=int)
+
+@app.route('/_get_regions'):
+    return ''
+
+@app.route('/_get_l_groups'):
+    return ''
 
 if __name__ == '__main__':
     app.run(
