@@ -1,18 +1,10 @@
 from boto import logs
 import os
-if os.environ.has_key('AWS_SECRET_ACCESS_KEY_ID'):
-    s_key = os.environ.get('AWS_SECRET_ACCESS_KEY_ID')
-if os.environ.has_key('AWS_ACCESS_KEY_ID'):
-    a_key = os.environ.get('AWS_ACCESS_KEY_ID')
-if os.environ.has_key('REGION'):
-    region = os.environ.get('REGION')
+s_key = os.environ.get('AWS_SECRET_ACCESS_KEY_ID') if os.environ.has_key('AWS_SECRET_ACCESS_KEY_ID') else None
+a_key = os.environ.get('AWS_ACCESS_KEY_ID') if os.environ.has_key('AWS_ACCESS_KEY_ID') else None
+region = os.environ.get('REGION') if os.environ.has_key('REGION') else 'us-east-1'
 print 'conectando'
-if a_key and s_key and region:
-    conn = logs.connect_to_region(region_name=region, aws_access_key_id=a_key, aws_secret_access_key=s_key)
-elif region:
-    conn = logs.connect_to_region(region_name=region)
-else:
-    conn = logs.connect_to_region(region_name='us-east-1')
+
 l_group_name = ''
 log_streams = []
 events = []
@@ -22,6 +14,11 @@ s_time = None
 e_time = None
 
 print 'pegando log_streams pelo log_group'
+
+def connect(region=region, aws_access_key_id=a_key, aws_secret_access_key=s_key):
+    conn = logs.connect_to_region(region_name=region, aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key)
+
+connect()
 
 def filter_stream_name(l_s_name, l_s):
     return filter(lambda x: x[u'logStreamName'].__contains__(l_s_name), l_s)
